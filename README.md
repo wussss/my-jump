@@ -42,7 +42,6 @@ import './libs/weapp-adapter'
 - game.json 小程序属性配置文件
 - project.config.json 项目配置文件
 
-#### 功能截图
+#### 功能截图(迭代)
 
-> 场景搭建与优化
-> <image width='200' src="https://github.com/wussss/my-hop/blob/master/screenshot/first.gif"></image><image width='200' src="https://github.com/wussss/my-hop/blob/master/screenshot/second.png"></image>
+<image width='200' src="https://github.com/wussss/my-hop/blob/master/screenshot/first.gif"></image><image width='200' src="https://github.com/wussss/my-hop/blob/master/screenshot/second.png"></image><image width='200' src="https://github.com/wussss/my-hop/blob/master/screenshot/third.png"></image>

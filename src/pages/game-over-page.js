@@ -1,6 +1,6 @@
 import sceneConf from '../../confs/scene-conf'
 import { GameOver, canvasToMesh } from '../view2d/GameOver'
-
+import AudioManager from '../modules/audioManager'
 export default class GameOverPage {
   constructor(callback) {
     this.cb = callback
@@ -11,6 +11,8 @@ export default class GameOverPage {
   show() {
     this.mesh.visible = true
     this.bindTouchEvent()
+    AudioManager.getAudioCtx(1).play()
+    console.log(AudioManager.getAudioCtx(1))
   }
 
   hide() {

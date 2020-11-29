@@ -8,6 +8,7 @@ import gameConf from '../../confs/game-conf'
 import bottleConf from '../../confs/bottle-conf'
 import utils from '../utils/index'
 import Score from '../view2d/Score'
+import AudioManager from '../modules/audioManager'
 
 
 export default class GamePage {
@@ -20,6 +21,8 @@ export default class GamePage {
   }
 
   init() {
+    AudioManager.getAudioCtx(0).play()
+    console.log(AudioManager.getAudioCtx(0))
     this.score = 0
     this.Score = new Score()
     this.Score.init({
@@ -38,7 +41,7 @@ export default class GamePage {
     this.addScore()
   }
 
-  render() {
+  render = () => {
     if (this.currentBlock) {
       this.currentBlock.update()
     }
@@ -49,7 +52,7 @@ export default class GamePage {
     if (this.visible) {
       this.scene.render()
     }
-    requestAnimationFrame(this.render.bind(this))
+    requestAnimationFrame(this.render)
   }
 
   deleteObjectsFromScene() {
@@ -70,6 +73,7 @@ export default class GamePage {
 
   restart() {
     this.deleteObjectsFromScene()
+    AudioManager.getAudioCtx(0).play()
     this.scene.reset()
     this.bottle.reset()
     this.updateScore(0)

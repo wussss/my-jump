@@ -5,7 +5,7 @@ import gameConf from '../../confs/game-conf'
 import { customAnimation } from '../../libs/animation'
 
 class Bottle {
-  constructor () {
+  constructor() {
     this.status = 'stop'
     this.velocity = {
       vx: 0, // 水平方向速度
@@ -16,62 +16,68 @@ class Bottle {
     this.scale = 1
   }
 
-  init () {
+  init() {
     this.loader = new THREE.TextureLoader()
     this.obj = new THREE.Object3D()
-    this.obj.name = 'bottle'
+    this.obj.name = 'bottle'
     this.obj.position.set(bottleConf.initPosition.x, bottleConf.initPosition.y + 30, bottleConf.initPosition.z)
 
     this.bottle = new THREE.Object3D()
     var texture = this.loader.load('/game/res/images/head.png')
-    var basicMaterial = new THREE.MeshBasicMaterial({ map: texture })
+    var basicMaterial = new THREE.MeshBasicMaterial({ map: texture })
 
-    var headRadius = 2.1 * 0.72
-    this.human = new THREE.Object3D()
-    this.head = new THREE.Mesh(new THREE.OctahedronGeometry(headRadius * 1.4), basicMaterial)
+    var headRadius = 2.1 * 0.72
+    this.human = new THREE.Object3D()
+    this.head = new THREE.Mesh(new THREE.OctahedronGeometry(headRadius * 1.4), basicMaterial)
     this.head.castShadow = true
     var texture2 = this.loader.load('/game/res/images/bottom.png')
-    this.bottom = new THREE.Mesh(new THREE.CylinderGeometry(0.88 * headRadius, 1.27 * headRadius, 2.68 * headRadius, 20), new THREE.MeshBasicMaterial({ map: texture2 }))
-    this.bottom.rotation.y = 4.7
-    this.bottom.castShadow = true
+    this.bottom = new THREE.Mesh(new THREE.CylinderGeometry(0.88 * headRadius, 1.27 * headRadius, 2.68 * headRadius, 20), new THREE.MeshBasicMaterial({ map: texture2 }))
+    this.bottom.rotation.y = 4.7
+    this.bottom.castShadow = true
     var middleGeometry = new THREE.CylinderGeometry(headRadius, 0.88 * headRadius, 1.2 * headRadius, 20)
     var texture3 = this.loader.load('/game/res/images/top.png')
-    var middleMaterial = new THREE.MeshBasicMaterial({ map: texture3 })
-    var materials = [middleMaterial, basicMaterial]
-    var totalGeometry = new THREE.Geometry()
-    middleGeometry.rotateY(4.7)
-    utils.merge(totalGeometry, middleGeometry, 0, [{ x: 0, y: this.bottom.position.y + 1.94 * headRadius, z: 0 }])
-    var topGeometry = new THREE.SphereGeometry(headRadius, 20, 20)
-    topGeometry.scale(1, 0.54, 1)
-    utils.merge(totalGeometry, topGeometry, 1, [{ x: 0, y: this.bottom.position.y + 2.54 * headRadius, z: 0 }])
-    this.middle = new THREE.Mesh(totalGeometry, materials)
-    this.middle.castShadow = true
-    this.body = new THREE.Object3D()
-    this.body.add(this.bottom)
-    this.body.add(this.middle)
-    this.human.add(this.body)
+    var middleMaterial = new THREE.MeshBasicMaterial({ map: texture3 })
+    var materials = [middleMaterial, basicMaterial]
+    var totalGeometry = new THREE.Geometry()
+    middleGeometry.rotateY(4.7)
+    utils.merge(totalGeometry, middleGeometry, 0, [{ x: 0, y: this.bottom.position.y + 1.94 * headRadius, z: 0 }])
+    var topGeometry = new THREE.SphereGeometry(headRadius, 20, 20)
+    topGeometry.scale(1, 0.54, 1)
+    utils.merge(totalGeometry, topGeometry, 1, [{ x: 0, y: this.bottom.position.y + 2.54 * headRadius, z: 0 }])
+    this.middle = new THREE.Mesh(totalGeometry, materials)
+    this.middle.castShadow = true
+    this.body = new THREE.Object3D()
+    this.body.add(this.bottom)
+    this.body.add(this.middle)
+    this.human.add(this.body)
     this.head.position.y = 7.56
     this.head.position.x = 0
     this.head.position.z = 0
-    this.human.add(this.head)
-    this.bottle.add(this.human)
+    this.human.add(this.head)
+    this.bottle.add(this.human)
 
-    this.bottle.position.y = 2.3
+    this.bottle.position.y = 2.3
     this.bottle.position.x = 0
     this.bottle.position.z = 0
     this.obj.add(this.bottle)
   }
 
-  reset () {
+  reset() {
     this.stop()
     this.obj.position.set(bottleConf.initPosition.x, bottleConf.initPosition.y + 30, bottleConf.initPosition.z)
   }
 
-  showup () {
-    customAnimation.to(this.obj.position, 0.5, { x: bottleConf.initPosition.x, y: bottleConf.initPosition.y + blockConf.height / 2, z: bottleConf.initPosition.z, ease: 'Bounce.easeOut' })
+  showup() {
+    customAnimation.to(this.obj.position, 0.5,
+      {
+        x: bottleConf.initPosition.x,
+        y: bottleConf.initPosition.y + blockConf.height / 2,
+        z: bottleConf.initPosition.z,
+        ease: 'Bounce.easeOut'
+      })
   }
 
-  stop () {
+  stop() {
     this.status = 'stop'
     this.velocity = {
       vx: 0, // 水平方向速度
@@ -81,7 +87,7 @@ class Bottle {
     this.scale = 1
   }
 
-  _shrink () {
+  _shrink() {
     const DELTA_SCALE = 0.005
     const HORIZON_DELTA_SCALE = 0.007
     const HEAD_DELTA = 0.03
@@ -100,11 +106,11 @@ class Bottle {
     this.obj.position.y -= (bottleDeltaY + deltaY * 2)
   }
 
-  shrink () {
+  shrink() {
     this.status = 'shrink'
   }
 
-  update () {
+  update() {
     if (this.status == 'shrink') {
       this._shrink()
     } else if (this.status == 'jump') {
@@ -115,14 +121,14 @@ class Bottle {
     this.lastFrameTime = Date.now()
   }
 
-  
 
-  setDirection (direction, axis) {
+
+  setDirection(direction, axis) {
     this.direction = direction
     this.axis = axis
   }
 
-  rotate () {    
+  rotate() {
     const scale = 1.4
     this.human.rotation.z = this.human.rotation.x = 0
     if (this.direction == 0) { // x
@@ -146,17 +152,17 @@ class Bottle {
     }
   }
 
-  jump (duration) {
+  jump() {
     this.status = 'jump'
   }
 
   _jump(tickTime) {
     const t = tickTime / 1000
     this.flyingTime = this.flyingTime + t
-    const translateH = this.velocity.vx * t
-    const translateY = this.velocity.vy * t - 0.5 * gameConf.gravity * t * t - gameConf.gravity * this.flyingTime * t
-    this.obj.translateY(translateY)
-    this.obj.translateOnAxis(this.axis, translateH)
+    const translateX = this.velocity.vx * t //水平匀速运动,x=ut
+    const translateY = this.velocity.vy * t - 0.5 * gameConf.gravity * t * t - gameConf.gravity * this.flyingTime * t // x=1/2 * a *Math.POW(t,2)
+    this.obj.translateY(translateY)//沿Z轴平移多少单位
+    this.obj.translateOnAxis(this.axis, translateX)
   }
 }
 
