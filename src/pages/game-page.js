@@ -17,12 +17,11 @@ export default class GamePage {
     this.state = 'stop'
     this.checkingHit = false
     this.targetPosition = {}
-    this.axis = null
+    this.openDataCtx = wx.getOpenDataContext()
   }
 
   init() {
     AudioManager.getAudioCtx(0).play()
-    console.log(AudioManager.getAudioCtx(0))
     this.score = 0
     this.Score = new Score()
     this.Score.init({
@@ -39,6 +38,10 @@ export default class GamePage {
     this.addGround() //物体接收阴影
     this.addBottle() //能形成阴影的材质
     this.addScore()
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })//允许转发给好友/朋友圈
   }
 
   render = () => {
@@ -181,13 +184,12 @@ export default class GamePage {
   }
 
   bindTouchEvent() {
-    console.log('bind touch event')
     canvas.addEventListener('touchstart', this.touchStartCallback)
     canvas.addEventListener('touchend', this.touchEndCallback)
   }
 
   removeTouchEvent() {
-    console.log('remove touch event')
+
     canvas.removeEventListener('touchstart', this.touchStartCallback)
     canvas.removeEventListener('touchend', this.touchEndCallback)
   }
@@ -214,6 +216,7 @@ export default class GamePage {
         this.updateScore(++this.score)
         this.updateNextBlock()
       } else { //游戏结束
+        this.uploadScore()
         this.state = 'over'
         this.removeTouchEvent()
         this.cb()
@@ -264,4 +267,11 @@ export default class GamePage {
     }
     return result1 || result2 || 0
   }
+  uploadScore = () => {
+    this.openDataCtx.postMessage({
+      type: 'updateMaxScore',
+      score: this.score
+    })
+    this.score = 0
+  }//向开放数据域发送每次的游戏成绩
 }

@@ -24,7 +24,7 @@ export const canvasToMesh = (canvas, width) => {
     })
     const mesh = new THREE.Mesh(geometry, material)
     mesh.name = '2d canvas'
-        return mesh
+    return mesh
 }
 //游戏结束
 export const GameOver = () => {
@@ -38,11 +38,16 @@ export const GameOver = () => {
     ctx.font = "30px Georgia"
     ctx.fillText("Game Over", window.innerWidth / 2 - 60, 160);
 
-    createRoundRect(ctx, 'white', window.innerWidth / 2 - 50, 180, 8, 100, 30)
+    // createRoundRect(ctx, 'white', window.innerWidth / 2 - 50, 180, 8, 100, 30)
 
-    ctx.fillStyle = '#58D68D'
-    ctx.font = '15px Georgia'
-    ctx.fillText("再来一局", window.innerWidth / 2 - 30, 200)
+    // ctx.fillStyle = '#58D68D'
+    // ctx.font = '15px Georgia'
+    // ctx.fillText("再来一局", window.innerWidth / 2 - 30, 200)
 
+    const image = wx.createImage()
+    image.src = 'res/images/again.png'
+    image.onload = () => {
+        ctx.drawImage(image,window.innerWidth / 2 - 50, 180,100,40)
+    }
     return myCanvas
 }

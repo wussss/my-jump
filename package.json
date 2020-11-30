@@ -1,0 +1,22 @@
+{
+  "name": "my-jump",
+  "version": "1.0.0",
+  "description": "> 使用 ES6 开发 > 游戏逻辑使用面向对象进行模块化开发（OOP） > 游戏整体使用 MVC 进行控制和管理",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wussss/my-jump.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wussss/my-jump/issues"
+  },
+  "homepage": "https://github.com/wussss/my-jump#readme",
+  "dependencies": {
+    "regenerator": "^0.14.7"
+  }
+}

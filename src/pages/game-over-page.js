@@ -1,18 +1,27 @@
-import sceneConf from '../../confs/scene-conf'
 import { GameOver, canvasToMesh } from '../view2d/GameOver'
 import AudioManager from '../modules/audioManager'
 export default class GameOverPage {
   constructor(callback) {
     this.cb = callback
     this.camera = null
-    this.mesh = null
+    this.mesh = new THREE.Object3D()
+    this.openDataCtx = wx.getOpenDataContext()
+    this.sharedCanvas = this.openDataCtx.canvas
+    this.sharedCanvas.width = window.innerWidth
+    this.sharedCanvas.height = window.innerHeight
+    this.texture = null
   }
 
   show() {
     this.mesh.visible = true
+    const timer = setInterval(() => {
+      this.texture.needsUpdate = true
+    }, 2000)
+    setTimeout(() => {
+      clearInterval(timer)
+    }, 10000)
     this.bindTouchEvent()
     AudioManager.getAudioCtx(1).play()
-    console.log(AudioManager.getAudioCtx(1))
   }
 
   hide() {
@@ -21,17 +30,31 @@ export default class GameOverPage {
   }
 
   init(options) {
-    this.initGameoverCanvas(options)
+    this.initGameoverCanvas()
+    this.initRankList()
+    this.camera = options.camera
+    this.camera.add(this.mesh)
     this.mesh.visible = false
   }
 
-  initGameoverCanvas = (options) => {
+  initGameoverCanvas = () => {
     const gameOverCanvas = GameOver()
-    this.mesh = canvasToMesh(gameOverCanvas, 60)
-    this.camera = options.camera
-    this.camera.add(this.mesh)
+    const cameraMesh = canvasToMesh(gameOverCanvas, 60)
+    this.mesh.add(cameraMesh)
   }
-
+  initRankList = () => {
+    const aspect = window.innerHeight / window.innerWidth
+    this.texture = new THREE.Texture(this.sharedCanvas)
+    const geometry = new THREE.PlaneGeometry(60, 60 * aspect)
+    const material = new THREE.MeshBasicMaterial({
+      map: this.texture,
+      transparent: true,
+      side: THREE.DoubleSide
+    })
+    const rankMesh = new THREE.Mesh(geometry, material)
+    rankMesh.name = 'rankMesh'
+    this.mesh.add(rankMesh)
+  }
   onTouchEnd = (e) => {
     const X = e.changedTouches[0].clientX
     const Y = e.changedTouches[0].clientY

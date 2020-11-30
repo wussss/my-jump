@@ -24,20 +24,29 @@ import './libs/weapp-adapter'
 - [x] bottle 跳跃
 - [x] bottle 的碰撞过程检测
 - [x] 分数累计
-- [ ] 社交优化
+- [x] 社交优化
 
 #### 目录结构
 
-- configs 配置文件
+- confs 游戏配置文件
 - libs 第三方库
   - three.js 支持 webgl API 的能力
   - weapp-adapter.js 支持 DOM、BOM 能力
+  - animation.js 动画
+  - tween.js 运动模型
+- res 静态资源
 - src 业务逻辑
-  - main 主逻辑
+  - main 游戏入口
+  - block 砖块模型逻辑
   - game mvc 结构
+  - modules 音频管理模块
+  - objects bottle 物体
+  - open-context 开放数据域
+    - runtime.js 支持 async/await 语法
   - pages 页面
+  - scene 相机光照
   - utils 通用方法
-- sources 音视频图片资源等
+  - view2d 2dcanvas
 - game.js 项目入口文件
 - game.json 小程序属性配置文件
 - project.config.json 项目配置文件
