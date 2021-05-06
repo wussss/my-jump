@@ -53,4 +53,4 @@ import './libs/weapp-adapter'
 
 #### 功能截图(迭代)
 
-<image width='200' src="https://github.com/wussss/my-hop/blob/master/screenshot/first.gif"></image><image width='200' src="https://github.com/wussss/my-hop/blob/master/screenshot/second.png"></image><image width='200' src="https://github.com/wussss/my-hop/blob/master/screenshot/third.png"></image>
+<image width='200' src="https://github.com/wussss/my-jump/blob/master/screenshot/first.gif"></image><image width='200' src="https://github.com/wussss/my-jump/blob/master/screenshot/second.png"></image><image width='200' src="https://github.com/wussss/my-jump/blob/master/screenshot/third.png"></image>
