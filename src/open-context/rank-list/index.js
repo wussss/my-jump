@@ -55,7 +55,6 @@ class RankListRenderer {
         this.ctx.fillStyle = '#AF7AC5'
         this.ctx.font = "15px Georgia"
         this.ctx.fillText(`历史最高分为 ${maxScore}`, window.innerWidth / 2 + 20, 120);
-        console.log('1')
     }
     listen = () => {
         wx.onMessage(async msg => {

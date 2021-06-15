@@ -10,7 +10,7 @@ customAnimation.to = function (obj, duration, options) {
     for (var name in options) {
         if (name === 'delay') {
             delay = options[name];
-        } else if (name === 'onComplete') { } else if (name === 'ease') { } else {
+        } else if (name === 'onComplete') {} else if (name === 'ease') {} else {
             setTimeout(function (name) {
                 return function () {
                     //console.log("name", name, obj[name], options[name], duration, delay, obj)
@@ -81,7 +81,7 @@ var TweenAnimation = exports.TweenAnimation = function TweenAnimation(from, to, 
     var options = {
         duration: 300,
         easing: 'Linear',
-        callback: function callback() { }
+        callback: function callback() {}
     };
 
     var setOptions = function setOptions(obj) {
@@ -164,7 +164,7 @@ var TweenAnimation = exports.TweenAnimation = function TweenAnimation(from, to, 
         } else if (start > during && selfAnimationId > killAnimationId) {
             // 动画结束，这里可以插入回调...
             options.callback(to, true);
-        } else { }
+        } else {}
     };
     // 开始执行动画
     step();

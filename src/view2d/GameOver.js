@@ -45,7 +45,7 @@ export const GameOver = () => {
     // ctx.fillText("再来一局", window.innerWidth / 2 - 30, 200)
 
     const image = wx.createImage()
-    image.src = 'res/images/again.png'
+    image.src = 'res/images/replay.png'
     image.onload = () => {
         ctx.drawImage(image,window.innerWidth / 2 - 50, 180,100,40)
     }
